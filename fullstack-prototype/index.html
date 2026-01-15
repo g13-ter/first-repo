@@ -4,17 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Full-Stack App (Student Build)</title>
-    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="not-authenticated">
     
-    <nav class="navbar navbar-dark bg-dark">
+    <nav class="navbar app-navbar">
         <div class="container-fluid">
             <a class="navbar-brand" href="#/">Full-Stack App</a>
-            <div class="d-flex">
+            <div class="app-flex">
                 <div class="role-logged-out">
                     <button class="btn btn-outline-light me-2" onclick="navigateTo('#/login')">Login</button>
                     <button class="btn btn-outline-light" onclick="navigateTo('#/register')">Register</button>
@@ -39,9 +37,9 @@
         </div>
     </nav>
 
-    <main class="container mt-4">
+    <main class="app-container">
         
-        <section id="home-page" class="page">
+        <section id="home-page" class="page home-page">
             <h1>Welcome to Full-Stack App</h1>
             <p class="lead">A static prototype before backend integration. Simulates:</p>
             <ul>
@@ -56,63 +54,71 @@
             <button class="btn btn-primary" onclick="navigateTo('#/register')">Get Started →</button>
         </section>
 
-        <section id="register-page" class="page">
-            <h2>Register Account</h2>
-            <form id="registerForm">
-                <div class="mb-3">
-                    <label class="form-label">First Name</label>
-                    <input type="text" class="form-control" id="regFirstName" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Last Name</label>
-                    <input type="text" class="form-control" id="regLastName" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Email</label>
-                    <input type="email" class="form-control" id="regEmail" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Password</label>
-                    <input type="password" class="form-control" id="regPassword" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Role</label>
-                    <select class="form-control" id="regRole" required>
-                        <option value="employee">Employee</option>
-                        <option value="admin">Admin</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-success">Sign Up</button>
-                <button type="button" class="btn btn-secondary" onclick="navigateTo('#/')">Cancel</button>
-            </form>
+        <section id="register-page" class="page auth-page">
+            <div class="auth-card">
+                <h2>Create Account</h2>
+                <form id="registerForm">
+                    <div class="app-field">
+                        <label class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="regFirstName" placeholder="Enter your first name" required>
+                    </div>
+                    <div class="app-field">
+                        <label class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="regLastName" placeholder="Enter your last name" required>
+                    </div>
+                    <div class="app-field">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" id="regEmail" placeholder="email@example.com" required>
+                    </div>
+                    <div class="app-field">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-control" id="regPassword" placeholder="Minimum 6 characters" required>
+                    </div>
+                    <div class="app-actions">
+                        <button type="submit" class="btn btn-success btn-lg">Sign Up</button>
+                    </div>
+                    <div class="app-actions">
+                        <button type="button" class="btn btn-secondary" onclick="navigateTo('#/')">Cancel</button>
+                    </div>
+                </form>
+            </div>
         </section>
 
-        <section id="verify-page" class="page">
-            <h2>Verify Email</h2>
-            <p>A verification code has been sent to <strong id="verifyEmail"></strong></p>
-            <p class="text-muted">For demo purposes, click the button below:</p>
-            <button class="btn btn-success" onclick="simulateVerification()">✅ Simulate Email Verification</button>
+        <section id="verify-page" class="page auth-page verify-page">
+            <div class="auth-card">
+                <h2>Email Verification</h2>
+                <p>Verification sent to</p>
+                <p><strong id="verifyEmail"></strong></p>
+                <p class="text-muted">For demo purposes, click the button below:</p>
+                <button class="btn btn-success" onclick="simulateVerification()">✅ Simulate Email Verification</button>
+            </div>
         </section>
 
-        <section id="login-page" class="page">
-            <h2>Login</h2>
-            <form id="loginForm">
-                <div class="mb-3">
-                    <label class="form-label">Email</label>
-                    <input type="email" class="form-control" id="loginEmail" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Password</label>
-                    <input type="password" class="form-control" id="loginPassword" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Login</button>
-                <button type="button" class="btn btn-link" onclick="navigateTo('#/register')">Need an account? Register</button>
-            </form>
+        <section id="login-page" class="page auth-page">
+            <div class="auth-card">
+                <h2>Welcome</h2>
+                <form id="loginForm">
+                    <div class="app-field">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" id="loginEmail" placeholder="email@example.com" required>
+                    </div>
+                    <div class="app-field">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-control" id="loginPassword" placeholder="Enter password" required>
+                    </div>
+                    <div class="app-actions">
+                        <button type="submit" class="btn btn-primary btn-lg">Login</button>
+                    </div>
+                    <div class="app-actions">
+                        <button type="button" class="btn btn-link" onclick="navigateTo('#/register')">Need an account? Register</button>
+                    </div>
+                </form>
+            </div>
         </section>
 
-        <section id="profile-page" class="page">
+        <section id="profile-page" class="page inner-page">
             <h2>My Profile</h2>
-            <div class="card">
+            <div class="card app-card">
                 <div class="card-body">
                     <h5 id="profileName">Admin User</h5>
                     <p><strong>Email:</strong> <span id="profileEmail">admin@example.com</span></p>
@@ -121,50 +127,17 @@
             </div>
         </section>
 
-        <section id="employees-page" class="page">
+        <section id="employees-page" class="page inner-page">
             <div class="section-header">
                 <h2>Employees</h2>
                 <button class="btn btn-success" onclick="toggleEmployeeForm()">+ Add Employee</button>
             </div>
             
-            <div id="employeeFormDiv" style="display: none;" class="card mb-3">
-                <div class="card-body">
-                    <h5>Add/Edit Employee</h5>
-                    <form id="employeeForm">
-                        <div class="mb-3">
-                            <label class="form-label">Employee ID</label>
-                            <input type="text" class="form-control" id="empId" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">User Email</label>
-                            <input type="email" class="form-control" id="empEmail" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Position</label>
-                            <input type="text" class="form-control" id="empPosition" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Department</label>
-                            <select class="form-control" id="empDept">
-                                <option>Engineering</option>
-                                <option>HR</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Hire Date</label>
-                            <input type="date" class="form-control" id="empDate" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Save</button>
-                        <button type="button" class="btn btn-secondary" onclick="toggleEmployeeForm()">Cancel</button>
-                    </form>
-                </div>
-            </div>
-            
-            <table class="table table-striped">
+            <table class="table table-striped app-table">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Name</th>
+                        <th>User</th>
                         <th>Position</th>
                         <th>Dept</th>
                         <th>Actions</th>
@@ -176,36 +149,48 @@
                     </tr>
                 </tbody>
             </table>
+
+            <div id="employeeFormDiv" style="display: none;" class="card app-card app-field">
+                <div class="card-body">
+                    <h5 id="empFormTitle">Add Employee</h5>
+                    <form id="employeeForm">
+                        <div class="app-field">
+                            <label class="form-label">Employee ID</label>
+                            <input type="text" class="form-control" id="empId" required>
+                        </div>
+                        <div class="app-field">
+                            <label class="form-label">User Email</label>
+                            <input type="email" class="form-control" id="empEmail" required>
+                        </div>
+                        <div class="app-field">
+                            <label class="form-label">Position</label>
+                            <input type="text" class="form-control" id="empPosition" required>
+                        </div>
+                        <div class="app-field">
+                            <label class="form-label">Department</label>
+                            <select class="form-control" id="empDept">
+                                <option>Engineering</option>
+                                <option>HR</option>
+                            </select>
+                        </div>
+                        <div class="app-field">
+                            <label class="form-label">Hire Date</label>
+                            <input type="date" class="form-control" id="empDate" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-secondary" onclick="toggleEmployeeForm()">Cancel</button>
+                    </form>
+                </div>
+            </div>
         </section>
 
-        <section id="departmentsSection" style="display: none;">
-        </section>
-
-        <section id="departments-page" class="page">
+        <section id="departments-page" class="page inner-page">
             <div class="section-header">
                 <h2>Departments</h2>
                 <button class="btn btn-success" onclick="toggleDepartmentForm()">+ Add Department</button>
             </div>
             
-            <div id="departmentFormDiv" style="display: none;" class="card mb-3">
-                <div class="card-body">
-                    <h5>Add/Edit Department</h5>
-                    <form id="departmentForm">
-                        <div class="mb-3">
-                            <label class="form-label">Name</label>
-                            <input type="text" class="form-control" id="deptName" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Description</label>
-                            <input type="text" class="form-control" id="deptDesc" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Save</button>
-                        <button type="button" class="btn btn-secondary" onclick="toggleDepartmentForm()">Cancel</button>
-                    </form>
-                </div>
-            </div>
-            
-            <table class="table table-striped">
+            <table class="table table-striped app-table">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -232,15 +217,33 @@
                     </tr>
                 </tbody>
             </table>
+            
+            <div id="departmentFormDiv" style="display: none;" class="card app-card app-field">
+                <div class="card-body">
+                    <h5 id="deptFormTitle">Add Department</h5>
+                    <form id="departmentForm">
+                        <div class="app-field">
+                            <label class="form-label">Name</label>
+                            <input type="text" class="form-control" id="deptName" required>
+                        </div>
+                        <div class="app-field">
+                            <label class="form-label">Description</label>
+                            <input type="text" class="form-control" id="deptDesc" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-secondary" onclick="toggleDepartmentForm()">Cancel</button>
+                    </form>
+                </div>
+            </div>
         </section>
 
-        <section id="accounts-page" class="page">
+        <section id="accounts-page" class="page inner-page">
             <div class="section-header">
                 <h2>Accounts</h2>
                 <button class="btn btn-success" onclick="toggleAccountForm()">+ Add Account</button>
             </div>
             
-            <table class="table table-striped">
+            <table class="table table-striped app-table">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -255,7 +258,7 @@
                         <td>Admin User</td>
                         <td>admin@example.com</td>
                         <td>Admin</td>
-                        <td><span class="text_SUCCESS">✓</span></td>
+                        <td><span class="text-success">✓</span></td>
                         <td>
                             <button class="btn btn-sm btn-primary" onclick="alert('Edit coming soon!')">Edit</button>
                             <button class="btn btn-sm btn-warning" onclick="alert('Reset password coming soon!')">Reset Password</button>
@@ -265,30 +268,30 @@
                 </tbody>
             </table>
 
-            <div id="accountFormDiv" style="display: none;" class="card mt-3">
+            <div id="accountFormDiv" style="display: none;" class="card app-card app-field">
                 <div class="card-body">
-                    <h5>Add/Edit Account</h5>
+                    <h5 id="accFormTitle">Add Account</h5>
                     <form id="accountForm">
-                        <div class="mb-3">
+                        <div class="app-field">
                             <label class="form-label">First Name</label>
                             <input type="text" class="form-control" id="accFirstName" required>
                         </div>
-                        <div class="mb-3">
+                        <div class="app-field">
                             <label class="form-label">Last Name</label>
                             <input type="text" class="form-control" id="accLastName" required>
                         </div>
-                        <div class="mb-3">
+                        <div class="app-field">
                             <label class="form-label">Email</label>
                             <input type="email" class="form-control" id="accEmail" required>
                         </div>
-                        <div class="mb-3">
+                        <div class="app-field">
                             <label class="form-label">Password</label>
                             <input type="password" class="form-control" id="accPassword" required>
                         </div>
-                        <div class="mb-3">
+                        <div class="app-field">
                             <label class="form-label">Role</label>
                             <select class="form-control" id="accRole">
-                                <option value="user">User</option>
+                                <option value="employee">Employee</option>
                                 <option value="admin">Admin</option>
                             </select>
                         </div>
@@ -303,7 +306,7 @@
             </div>
         </section>
 
-        <section id="requests-page" class="page">
+        <section id="requests-page" class="page inner-page">
             <div class="section-header">
                 <h2>My Requests</h2>
                 <button class="btn btn-success" onclick="openRequestModal()">+ New Request</button>
@@ -312,11 +315,13 @@
             <p id="noRequestsText">You have no requests yet.</p>
             <button id="createRequestBtn" class="btn btn-primary" onclick="openRequestModal()">Create One</button>
 
-            <table class="table table-striped mt-3" id="requestsTable" style="display: none;">
+            <table class="table table-striped app-table mt-3" id="requestsTable" style="display: none;">
                 <thead>
                     <tr>
-                        <th>Type</th>
-                        <th>Items</th>
+                            <th>Type</th>
+                            <th>Items</th>
+                            <th>Status</th>
+                            <th>Date</th>
                     </tr>
                 </thead>
                 <tbody id="requestsTableBody"></tbody>
@@ -335,8 +340,12 @@
                 <div class="modal-body">
                     <form id="requestForm">
                         <div class="mb-3">
-                            <label class="form-label">Type</label>
-                            <input type="text" class="form-control" id="requestType" placeholder="Equipment" required>
+                               <label class="form-label">Type</label>
+                               <select class="form-select" id="requestType" required>
+                                  <option value="Equipment">Equipment</option>
+                                  <option value="Leave">Leave</option>
+                                  <option value="Resources">Resources</option>
+                               </select>
                         </div>
                         <div class="mb-2 d-flex justify-content-between align-items-center">
                             <label class="form-label mb-0">Items</label>

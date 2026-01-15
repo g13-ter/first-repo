@@ -1,10 +1,29 @@
+:root{
+	--blue-900:#0B2545;
+	--blue-800:#1E3A8A;
+	--blue-600:#2563EB;
+	--blue-500:#3B82F6;
+	--blue-300:#93C5FD;
+	--blue-100:#EAF2FF;
+	--bg:#F7FAFF;
+	--card:#FFFFFF;
+	--text:#0A2342;
+	--muted:#3C5B82;
+	--border:#CFE0FF;
+	--shadow:0 16px 35px rgba(7,31,71,0.15);
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+	font-family: 'Segoe UI', Arial, sans-serif;
+	background-color: var(--bg);
+	color: var(--text);
+	margin: 0;
+	padding: 0;
 }
 
 main {
-    margin-top: 2rem;
+    margin-top: 0;
+    padding: 0;
 }
 
 main section {
@@ -38,6 +57,10 @@ main section h2 {
 	display: block;
 }
 
+#register-page.active, #login-page.active, #verify-page.active {
+	display: flex;
+}
+
 body.not-authenticated .role-logged-in {
 	display: none;
 }
@@ -52,4 +75,462 @@ body.authenticated .role-logged-out {
 
 body.is-admin .role-admin {
 	display: block;
+}
+
+/* --- Blue & White Hero Theme (CSS-only; no HTML changes) --- */
+/* Navbar: override Bootstrap dark with a deep-blue gradient */
+/* Alias: .app-navbar */
+.navbar.navbar-dark.bg-dark, .app-navbar {
+	background: linear-gradient(180deg, var(--blue-800) 0%, var(--blue-900) 100%);
+	backdrop-filter: blur(2px);
+	position: relative;
+	z-index: 1000;
+}
+.navbar .navbar-brand, .app-navbar .navbar-brand { color: #ffffff; font-weight: 700; }
+.navbar .btn-outline-light, .app-navbar .btn-outline-light { border-color: #ffffff; color: #ffffff; background: transparent; }
+.navbar .btn-outline-light:hover, .app-navbar .btn-outline-light:hover { background-color: rgba(255,255,255,0.15); color: #ffffff; }
+.navbar .btn-secondary, .app-navbar .btn-secondary { background-color: var(--blue-800); border-color: var(--blue-800); color: #ffffff; }
+.navbar .btn-secondary:hover, .app-navbar .btn-secondary:hover { background-color: #173c78; border-color: #173c78; }
+
+/* Home hero styling */
+/* Alias: .home-page */
+#home-page.page, .home-page.page {
+	position: relative;
+	min-height: calc(100vh - 56px);
+	padding: 3rem 2rem 6rem 2rem;
+	background: linear-gradient(180deg, var(--bg) 0%, var(--blue-100) 45%, #D6E8FF 100%);
+	color: var(--text);
+	border-radius: 0;
+	box-shadow: none;
+	overflow: hidden;
+	margin: 0;
+	width: 100%;
+}
+
+#home-page.page.active, .home-page.page.active {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+#home-page h1, .home-page h1 {
+	font-size: clamp(2.2rem, 6vw, 3.2rem);
+	font-weight: 800;
+	letter-spacing: 0.005em;
+}
+#home-page .lead, .home-page .lead { 
+	max-width: 60ch; 
+	opacity: 1; 
+	font-size: 1.1rem;
+}
+#home-page ul, .home-page ul { 
+	max-width: 60ch; 
+	font-size: 1.02rem;
+	line-height: 1.7;
+}
+#home-page .alert, .home-page .alert { 
+	background-color: #ffffff; 
+	color: var(--text); 
+	border: 1px solid var(--border);
+}
+#home-page .btn-primary, .home-page .btn-primary { 
+	background: linear-gradient(180deg, var(--blue-500) 0%, var(--blue-600) 100%);
+	color: #ffffff; 
+	border: none;
+	font-weight: 700;
+	font-size: 1rem;
+	padding: 0.6rem 1.6rem;
+	border-radius: 10px;
+	box-shadow: 0 6px 16px rgba(37,99,235,0.28);
+}
+#home-page .btn-primary:hover, .home-page .btn-primary:hover { 
+	filter: brightness(1.05);
+}
+
+/* Hero accent overlay to introduce richer dark blue */
+#home-page::before,
+#home-page::after,
+.home-page::before,
+.home-page::after {
+	display: none;
+}
+#home-page::after, .home-page::after {
+	content: '';
+	display: block;
+	position: absolute;
+	inset: 55% -10% -15% -10%;
+	background: radial-gradient(60% 80% at 85% 25%, rgba(7,31,71,0.4) 0%, rgba(7,31,71,0.2) 45%, rgba(7,31,71,0) 75%);
+	pointer-events: none;
+}
+
+/* Keep other pages as readable white cards */
+.page:not(#home-page):not(#register-page):not(#login-page):not(#verify-page) {
+	background-color: #ffffff;
+	color: #0B1F4D;
+	padding: 1.5rem 2rem;
+	border-radius: 8px;
+	box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+	margin: 2rem 0;
+}
+
+/* Auth Pages (Register, Login, Verify) Styling */
+/* Auth Pages aliases: .auth-page, .verify-page, .auth-box */
+#register-page, #login-page, #verify-page, .auth-page {
+	min-height: calc(100vh - 56px);
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background: linear-gradient(180deg, var(--blue-100) 0%, #DDEBFF 60%, #D2E4FF 100%);
+	padding: 2rem;
+	margin: 0;
+}
+
+#register-page.active, #login-page.active, #verify-page.active, .auth-page.active {
+	display: flex;
+}
+
+#register-page h2, #login-page h2, #verify-page h2, .auth-page h2, .verify-page h2 {
+	color: var(--text);
+	text-align: center;
+	margin-bottom: 2rem;
+	font-weight: 700;
+	font-size: 2rem;
+}
+
+#register-page form, #login-page form, .auth-page form {
+	background: linear-gradient(160deg, rgba(255,255,255,0.98) 0%, rgba(235,245,255,0.95) 100%);
+	padding: 2.75rem 2.5rem;
+	border-radius: 18px;
+	box-shadow: var(--shadow);
+	width: 100%;
+	max-width: 520px;
+	border: 1px solid var(--border);
+}
+
+.auth-card-wrapper, .auth-box, .auth-card {
+	width: 100%;
+	max-width: 620px;
+	background: rgba(255,255,255,0.18);
+	border: 1px solid rgba(255,255,255,0.35);
+	border-radius: 26px;
+	box-shadow: 0 35px 65px rgba(8,23,74,0.45);
+	padding: 3rem 3.25rem;
+	backdrop-filter: blur(18px);
+}
+
+#register-page .form-label, #login-page .form-label, .auth-page .form-label {
+	color: var(--text);
+	font-weight: 600;
+	font-size: 0.9rem;
+}
+
+#register-page .form-control, #login-page .form-control, 
+#register-page .form-select, #login-page .form-select,
+.auth-page .form-control, .auth-page .form-select {
+	border: 2px solid var(--border);
+	border-radius: 8px;
+	padding: 0.75rem;
+	transition: border-color 0.3s;
+}
+
+#register-page .form-control:focus, #login-page .form-control:focus,
+#register-page .form-select:focus, #login-page .form-select:focus,
+.auth-page .form-control:focus, .auth-page .form-select:focus {
+	border-color: #2B60D4;
+	box-shadow: 0 0 0 0.2rem rgba(43, 96, 212, 0.25);
+}
+
+#register-page .btn, #login-page .btn, .auth-page .btn {
+	border-radius: 8px;
+	padding: 0.75rem 2rem;
+	font-weight: 600;
+	transition: all 0.3s;
+}
+
+#register-page .btn-success {
+	background: linear-gradient(180deg, var(--blue-500) 0%, var(--blue-600) 100%);
+	border: none;
+}
+
+#register-page .btn-success:hover {
+	background: linear-gradient(135deg, #1F3B73 0%, #0B1F4D 100%);
+	transform: translateY(-2px);
+	box-shadow: 0 5px 15px rgba(43, 96, 212, 0.4);
+}
+
+#login-page .btn-primary, .auth-page .btn-primary {
+	background: linear-gradient(180deg, var(--blue-500) 0%, var(--blue-600) 100%);
+	border: none;
+}
+
+#login-page .btn-primary:hover, .auth-page .btn-primary:hover {
+	background: linear-gradient(135deg, #1F3B73 0%, #0B1F4D 100%);
+	transform: translateY(-2px);
+	box-shadow: 0 5px 15px rgba(43, 96, 212, 0.4);
+}
+
+#register-page .btn-secondary, #login-page .btn-link, .auth-page .btn-link {
+	color: #2B60D4;
+	background: transparent;
+	border: 2px solid #2B60D4;
+}
+
+#register-page .btn-secondary:hover, #login-page .btn-link:hover, .auth-page .btn-link:hover {
+	background: #2B60D4;
+	color: #ffffff;
+	text-decoration: none;
+}
+
+#verify-page, .verify-page {
+	color: #ffffff;
+	text-align: center;
+}
+
+#verify-page .btn-success, .verify-page .btn-success {
+	background: #ffffff;
+	color: var(--text);
+	border: none;
+	padding: 1rem 3rem;
+	font-size: 1.1rem;
+	font-weight: 700;
+	border-radius: 50px;
+	transition: all 0.3s;
+}
+
+#verify-page .btn-success:hover, .verify-page .btn-success:hover {
+	background: #edf6ff;
+}
+
+#verify-page p, .verify-page p {
+	font-size: 1.1rem;
+	margin-bottom: 1rem;
+}
+
+#verify-page #verifyEmail, .verify-page #verifyEmail {
+	color: #7DB7FF;
+	font-weight: 700;
+}
+
+.auth-card-wrapper, .auth-box, .auth-card {
+	width: 100%;
+	max-width: 450px;
+}
+
+/* Remove margin above hero due to container spacing */
+/* Simpler container alias */
+.app-container {
+	margin-top: 0 !important;
+	max-width: 100% !important;
+	padding: 0 !important;
+}
+
+/* Simple alias utility classes */
+.app-flex { display: flex; }
+.app-field { margin-bottom: 1rem; }
+.app-actions { display: grid; gap: 0.5rem; margin-bottom: 1rem; }
+
+/* ===== White + Blue Theme for Inner Pages ===== */
+/* Inner Pages alias: .inner-page */
+#profile-page.page,
+#employees-page.page,
+#accounts-page.page,
+#departments-page.page,
+#requests-page.page,
+.inner-page.page {
+	background: linear-gradient(140deg, var(--bg) 0%, #E9F3FF 55%, #D8ECFF 100%);
+	color: var(--text);
+	padding: 3rem 3.5rem;
+	border-radius: 0;
+	margin: 0;
+}
+
+#employees-page .section-header h2,
+#accounts-page .section-header h2,
+#departments-page .section-header h2,
+#requests-page .section-header h2,
+#profile-page h2,
+.inner-page .section-header h2,
+.inner-page h2 {
+	color: var(--text);
+	font-weight: 800;
+}
+
+/* Cards */
+#employees-page .card,
+#accounts-page .card,
+#departments-page .card,
+#requests-page .card,
+#profile-page .card,
+.inner-page .card,
+.app-card {
+	background: var(--card);
+	border: 1px solid var(--border);
+	border-radius: 18px;
+	box-shadow: var(--shadow);
+}
+
+/* Tables */
+#employees-page table,
+#accounts-page table,
+#departments-page table,
+#requests-page table,
+.inner-page table,
+.app-table {
+	background: var(--card);
+	color: var(--text);
+	border-radius: 14px;
+	overflow: hidden;
+	border: 1px solid var(--border);
+	box-shadow: 0 14px 30px rgba(6,24,71,0.1);
+}
+
+#employees-page table thead,
+#accounts-page table thead,
+#departments-page table thead,
+#requests-page table thead,
+.inner-page table thead,
+.app-table thead {
+	background: linear-gradient(120deg, var(--blue-100) 0%, #DBEEFF 100%);
+}
+
+#employees-page .table-striped>tbody>tr:nth-of-type(odd),
+#accounts-page .table-striped>tbody>tr:nth-of-type(odd),
+#departments-page .table-striped>tbody>tr:nth-of-type(odd),
+#requests-page .table-striped>tbody>tr:nth-of-type(odd),
+.inner-page .table-striped>tbody>tr:nth-of-type(odd),
+.app-table.table-striped>tbody>tr:nth-of-type(odd) {
+	--bs-table-accent-bg: #f6fbff;
+}
+
+.verify-toggle {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	background: transparent;
+	border: 1px solid var(--border);
+	color: var(--muted);
+	padding: 0.35rem 0.9rem;
+	border-radius: 999px;
+	font-size: 0.85rem;
+	font-weight: 600;
+	transition: all 0.2s ease;
+}
+
+.verify-toggle .verify-dot {
+	width: 0.65rem;
+	height: 0.65rem;
+	border-radius: 50%;
+	background: #d1d5db;
+	box-shadow: inset 0 0 0 2px #fff;
+}
+
+.verify-toggle.active {
+	background: rgba(34,197,94,0.15);
+	border-color: #22c55e;
+	color: #15803d;
+}
+
+.verify-toggle.active .verify-dot {
+	background: #22c55e;
+	box-shadow: 0 0 6px rgba(34,197,94,0.6);
+}
+
+.verify-toggle:hover {
+	border-color: var(--blue-500);
+	color: var(--blue-600);
+}
+
+#employees-page .table> :not(caption)>*>*,
+#accounts-page .table> :not(caption)>*>*,
+#departments-page .table> :not(caption)>*>*,
+#requests-page .table> :not(caption)>*>*,
+.inner-page .table> :not(caption)>*>*,
+.app-table> :not(caption)>*>* {
+	background-color: transparent !important;
+}
+
+#employees-page table th,
+#accounts-page table th,
+#departments-page table th,
+#requests-page table th,
+.inner-page table th,
+.app-table th {
+	font-weight: 700;
+	color: var(--text);
+}
+
+/* Inputs/labels inside inner pages */
+#employees-page label,
+#accounts-page label,
+#departments-page label,
+#requests-page label,
+.inner-page label {
+	color: var(--muted);
+	font-weight: 600;
+}
+
+#employees-page input,
+#employees-page select,
+#accounts-page input,
+#accounts-page select,
+#departments-page input,
+#requests-page input,
+.inner-page input,
+.inner-page select {
+	border: 2px solid var(--border);
+	border-radius: 10px;
+	background: var(--card);
+	color: var(--text);
+}
+
+#accountForm .form-check-input {
+	width: 1.15rem;
+	height: 1.15rem;
+	border: 2px solid var(--border);
+	border-radius: 6px;
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+#accountForm .form-check-input:checked {
+	background-color: #22c55e;
+	border-color: #15803d;
+	box-shadow: 0 0 6px rgba(34,197,94,0.6);
+}
+
+#accountForm .form-check-label {
+	color: var(--text);
+	font-weight: 600;
+	margin-left: 0.35rem;
+}
+
+#employees-page input:focus,
+#employees-page select:focus,
+#accounts-page input:focus,
+#accounts-page select:focus,
+#departments-page input:focus,
+#requests-page input:focus,
+.inner-page input:focus,
+.inner-page select:focus {
+	border-color: #2B60D4;
+	box-shadow: 0 0 0 0.2rem rgba(43,96,212,0.2);
+}
+
+/* Buttons on inner pages */
+#employees-page .btn-success,
+#accounts-page .btn-success,
+#departments-page .btn-success,
+#requests-page .btn-success,
+.inner-page .btn-success {
+	background: linear-gradient(135deg, #2B60D4 0%, #1F3B73 100%);
+	border: none;
+	box-shadow: 0 10px 24px rgba(43,96,212,0.25);
+}
+
+#employees-page .btn-primary,
+#accounts-page .btn-primary,
+#departments-page .btn-primary,
+#requests-page .btn-primary,
+.inner-page .btn-primary {
+	background: linear-gradient(120deg, #4ea9ff 0%, #1d67ff 100%);
+	border: none;
 }
