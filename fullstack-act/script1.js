@@ -378,11 +378,25 @@ function saveProfile(event) {
 
     const updated = {
         ...currentUser,
-        firstName: getValue('editFirstName'),
         lastName: getValue('editLastName'),
         email: newEmail
     };
+    
+    const newfirstName = getValue('editFirstName');
+    if (!newfirstName) return;
 
+    if (newfirstName.length < 2) {
+        showToast('first name must be at least 2 characters', 'warning');
+        return;
+    }
+
+      const newlastName = getValue('editLastName');
+    if (!newlastName) return;
+
+    if (newlastName.length < 2) {
+        showToast('last name must be at least 2 characters', 'warning');
+        return;
+    }
     const newPassword = getValue('editPassword');
         if (!newPassword) return;
 
